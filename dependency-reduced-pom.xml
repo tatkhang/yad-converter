@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>kv.tools</groupId>
+  <artifactId>yad-converter</artifactId>
+  <name>yadConverter</name>
+  <version>0.0.1-SNAPSHOT</version>
+  <description>A simple Java CLI tool that help convert data in CSV format to Parquet and via versa</description>
+  <build>
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.5.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer>
+                  <mainClass>YadConverter</mainClass>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <commons-cli.version>1.8.0</commons-cli.version>
+    <parquet.version>1.13.1</parquet.version>
+    <hadoop.version>3.3.6</hadoop.version>
+    <maven.compiler.target>11</maven.compiler.target>
+    <commons-csv.version>1.10.0</commons-csv.version>
+    <avro.version>1.11.1</avro.version>
+  </properties>
+</project>
