@@ -66,7 +66,6 @@ public class YadConverterIntegrationTests {
         String[] args = {"-i", inputFile.toString(), "-o", outputFile.toString()};
         assertDoesNotThrow(() -> YadConverter.main(args));
 
-        String output = errorStreamCaptor.toString(StandardCharsets.UTF_8);
         // Assert: output file exists and is not empty
         assertTrue(Files.exists(outputFile), "Output " + outputFileName + " file was not created");
         assertTrue(Files.size(outputFile) > 0, "Output " + outputFileName + " file is empty");

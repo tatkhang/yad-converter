@@ -11,8 +11,7 @@ public class YadConverter {
             System.err.printf("*** YadConverter error: %s", ex.getMessage());
         } catch (Exception ex) {
             System.err.println("*** Error: There's something went wrong, please try again.");
-            ex.printStackTrace();
         }
-	}
+    }
 
 }

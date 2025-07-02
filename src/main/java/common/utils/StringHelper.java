@@ -38,7 +38,7 @@ public class StringHelper {
     public static boolean isParseableAsDouble(String value) {
         try {
             Double.parseDouble(value);
-        } catch (NumberFormatException e) {
+        } catch (NullPointerException | NumberFormatException e) {
             return false;
         }
 
@@ -70,7 +70,7 @@ public class StringHelper {
     public static Double convertToDouble(String stringValue) throws YadConverterException {
         try {
             return Double.parseDouble(stringValue);
-        } catch (NumberFormatException ex) {
+        } catch (NullPointerException | NumberFormatException ex) {
             throw new YadConverterException("Could not convert %s to DOUBLE.", stringValue);
         }
     }
