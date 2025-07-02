@@ -49,17 +49,10 @@ public class ConverterPipeline {
      *         </ol>
      */
     public static ConverterPipeline buildDefault() {
-//        return ConverterPipeline
-//            .startWith(FileExtensionValidationStep.class)
-//            .then(CsvToParquetConversionStep.class)
-//            .then(ParquetToCsvConversionStep.class)
-//            .then(FallbackStep.class);
-
         return ConverterPipeline
             .startWith(FileExtensionValidationStep.class)
             .then(InputFileParsingStep.class)
-            .then(OutputFileWritingStep.class)
-            .then(FallbackStep.class);
+            .then(OutputFileWritingStep.class);
     }
 
     /**

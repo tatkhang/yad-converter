@@ -31,7 +31,7 @@ public class CliOptionsParsingStep extends CliPipelineStepBase {
         data.setInputFilePath(inputFilePath);
         data.setOutputFilePath(outputFilePath);
 
-        nextStep.run(data);
+        tryRunNextStep(data);
     }
 
 }

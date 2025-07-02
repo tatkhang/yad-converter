@@ -15,6 +15,8 @@ public class OutputFileWritingStep extends ConverterPipelineStepBase {
         IFileWriter filewriter = registry.get(data.getOutputFileExtension());
 
         filewriter.writeFromAvro(data.getOutputFilePath(), data.getAvroData());
+
+        tryRunNextStep(data);
     }
 
 }

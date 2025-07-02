@@ -5,6 +5,7 @@ import java.util.Map;
 
 import common.exceptions.YadConverterException;
 import common.utils.GenericTypeHelper;
+
 import parser.abstractions.IFileParser;
 import parser.implementations.*;
 
@@ -17,7 +18,8 @@ public class FileParserRegistry {
 
     public static FileParserRegistry buildDefault() {
         return new FileParserRegistry()
-            .register(CsvFileParser.class);
+            .register(CsvFileParser.class)
+            .register(ParquetFileParser.class);
     }
 
     public <T extends IFileParser> FileParserRegistry register(Class<T> clazz) {

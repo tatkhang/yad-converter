@@ -9,9 +9,12 @@ public class AvroDataCarrier {
     private Schema schema;
     private List<GenericRecord> records;
 
-    public AvroDataCarrier(Schema schema, List<GenericRecord> records) {
-        this.schema = schema;
+    public AvroDataCarrier(List<GenericRecord> records) {
         this.records = records;
+
+        if (records.size() > 0) {
+            this.schema = records.get(0).getSchema();
+        }
     }
 
     public Schema getSchema() {

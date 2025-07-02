@@ -23,7 +23,7 @@ public class FileExtensionValidationStep extends ConverterPipelineStepBase {
             throw new YadConverterException("Input file extension and Output file extension cannot be the same.");
         }
 
-        nextStep.run(data);
+        tryRunNextStep(data);
     }
 
 }

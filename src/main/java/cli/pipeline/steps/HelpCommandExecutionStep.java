@@ -7,12 +7,12 @@ import cli.pipeline.models.CliPipelineData;
 
 public class HelpCommandExecutionStep extends CliPipelineStepBase {
 
-	public void run(CliPipelineData data) throws Exception {
-		if (!data.shouldShowHelp()) {
-			nextStep.run(data);
-			return;
-		}
+    public void run(CliPipelineData data) throws Exception {
+        if (!data.shouldShowHelp()) {
+            tryRunNextStep(data);
+            return;
+        }
 
-		new HelpFormatter().printHelp("java -jar YadConverter.jar -i <file path> -o <file path>", data.getOptions());
-	}
+        new HelpFormatter().printHelp("java -jar YadConverter.jar -i <file path> -o <file path>", data.getOptions());
+    }
 }

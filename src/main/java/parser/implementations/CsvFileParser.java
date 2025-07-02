@@ -62,7 +62,7 @@ public class CsvFileParser implements IFileParser {
         Schema avroSchema = inferAvroSchemaFromCsv(headers, records);
         List<GenericRecord> avroRecords = retriveAvroRecords(avroSchema, headers, records);
 
-        return new AvroDataCarrier(avroSchema, avroRecords);
+        return new AvroDataCarrier(avroRecords);
     }
 
     private List<String> getCsvHeaders(CSVParser parser) throws YadConverterException {

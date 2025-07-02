@@ -19,12 +19,10 @@ import writer.abstractions.IFileWriter;
 
 public class ParquetFileWriter implements IFileWriter {
 
-    @Override
     public String getSupportedExtension() {
         return SupportingExtensionContants.PARQUET;
     }
 
-    @Override
     public void writeFromAvro(String outputFilePath, AvroDataCarrier data) throws YadConverterException {
         try {
             OutputFile parquetFile = HadoopOutputFile.fromPath(new Path(outputFilePath), new Configuration());
@@ -37,8 +35,7 @@ public class ParquetFileWriter implements IFileWriter {
                 for (GenericRecord avroRecord : data.getRecords()) {
                     writer.write(avroRecord);
                 }
-    
-    
+
             }
         } catch (IOException ex) {
             throw new YadConverterException("Output file already exists.");

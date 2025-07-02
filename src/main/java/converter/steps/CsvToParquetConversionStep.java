@@ -34,7 +34,7 @@ public class CsvToParquetConversionStep extends ConverterPipelineStepBase {
             && data.getOutputFileExtension().equalsIgnoreCase(SupportingExtensionContants.PARQUET);
 
         if (!isCsvToParquetConversion) {
-            nextStep.run(data);
+            tryRunNextStep(data);
             return;
         }
 

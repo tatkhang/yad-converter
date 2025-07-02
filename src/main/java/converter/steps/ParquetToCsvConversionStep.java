@@ -33,7 +33,7 @@ public class ParquetToCsvConversionStep extends ConverterPipelineStepBase {
             && data.getOutputFileExtension().equalsIgnoreCase(SupportingExtensionContants.CSV);
 
         if (!isParquetToCsvConversion) {
-            nextStep.run(data);
+            tryRunNextStep(data);
             return;
         }
 

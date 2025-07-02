@@ -18,7 +18,8 @@ public class FileWriterRegistry {
 
     public static FileWriterRegistry buildDefault() {
         return new FileWriterRegistry()
-            .register(ParquetFileWriter.class);
+            .register(ParquetFileWriter.class)
+            .register(CsvFileWriter.class);
     }
 
     public <T extends IFileWriter> FileWriterRegistry register(Class<T> clazz) {

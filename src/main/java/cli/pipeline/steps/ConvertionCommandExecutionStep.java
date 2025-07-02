@@ -19,7 +19,7 @@ public class ConvertionCommandExecutionStep extends CliPipelineStepBase {
         System.out.println(
             String.format("Successfully converted. The results are available at '%s'", data.getOutputFilePath()));
 
-        nextStep.run(data);
+        tryRunNextStep(data);
     }
 
 }

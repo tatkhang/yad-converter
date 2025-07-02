@@ -38,7 +38,7 @@ public class CliOptionsSetupStep extends CliPipelineStepBase {
 
         data.setOptions(options);
 
-        nextStep.run(data);
-	}
-    
+        tryRunNextStep(data);
+    }
+
 }

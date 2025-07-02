@@ -18,7 +18,7 @@ public class InputFileParsingStep extends ConverterPipelineStepBase {
         AvroDataCarrier avroData = fileParser.parseToAvro(data.getInputFilePath());
         data.setAvroData(avroData);
 
-        nextStep.run(data);
+        tryRunNextStep(data);
     }
 
 }
