@@ -17,8 +17,10 @@ Yet another data converter (YadConverter) is a simple Java CLI tool that help co
 - Allow file configuration:
   + CSV delimiter
   + Parquet row group size
-- Integrate logging
-- Show working progress
-- Performance consideration for large file
 - Overwrite output file option
+- Show working progress
+- Integrate logging
+- Performance consideration for large file
+  + Divide into smaller chunks
+  + Consider using org.apache.spark which has already processed by dataframe
 - Support other types of conversion
