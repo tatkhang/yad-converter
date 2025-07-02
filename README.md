@@ -10,7 +10,7 @@ Yet another data converter (YadConverter) is a simple Java CLI tool that help co
 
 ## Usage
 - Navigate to project root
-- Compile project with command `mvn compile`
+- Compile project with command `mvn clean package`
 - Run application with command `java -jar target/yad-converter.jar -i <input file path> -o <output file path>`
 
 ## Room for improvement
