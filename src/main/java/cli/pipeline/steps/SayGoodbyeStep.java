@@ -1,9 +1,9 @@
 package cli.pipeline.steps;
 
-import cli.pipeline.abstractions.CliPipelineBaseStep;
+import cli.pipeline.abstractions.CliPipelineStepBase;
 import cli.pipeline.models.CliPipelineData;
 
-public class SayGoodbyeStep extends CliPipelineBaseStep {
+public class SayGoodbyeStep extends CliPipelineStepBase {
 
 	public void run(CliPipelineData data) {
 		System.out.println("---------------------------------------");

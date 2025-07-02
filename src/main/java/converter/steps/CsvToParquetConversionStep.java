@@ -20,20 +20,14 @@ import org.apache.parquet.hadoop.metadata.CompressionCodecName;
 import org.apache.parquet.hadoop.util.HadoopOutputFile;
 import org.apache.parquet.io.OutputFile;
 
-import converter.abstractions.IConvertPilelineStep;
+import converter.abstractions.ConverterPipelineStepBase;
 import converter.constants.FileConstants;
 import converter.constants.SupportingExtensionContants;
 import converter.exceptions.YadConverterException;
 import converter.models.ConverterPipelineData;
 import utils.StringHelper;
 
-public class CsvToParquetConversionStep implements IConvertPilelineStep {
-    private IConvertPilelineStep nextStep;
-
-    public void setNextStep(IConvertPilelineStep nextStep) {
-        this.nextStep = nextStep;
-    }
-
+public class CsvToParquetConversionStep extends ConverterPipelineStepBase {
     public void run(ConverterPipelineData data) throws YadConverterException {
         boolean isCsvToParquetConversion =
             data.getInputFileExtension().equalsIgnoreCase(SupportingExtensionContants.CSV)

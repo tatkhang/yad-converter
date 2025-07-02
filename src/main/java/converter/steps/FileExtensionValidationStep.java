@@ -1,17 +1,11 @@
 package converter.steps;
 
-import converter.abstractions.IConvertPilelineStep;
+import converter.abstractions.ConverterPipelineStepBase;
 import converter.constants.SupportingExtensionContants;
 import converter.exceptions.YadConverterException;
 import converter.models.ConverterPipelineData;
 
-public class FileExtensionValidationStep implements IConvertPilelineStep {
-    private IConvertPilelineStep nextStep;
-
-    public void setNextStep(IConvertPilelineStep nextStep) {
-        this.nextStep = nextStep;
-    }
-
+public class FileExtensionValidationStep extends ConverterPipelineStepBase {
     public void run(ConverterPipelineData data) throws YadConverterException {
         String inputFileExtension = data.getInputFileExtension();
         String outputFileExtension = data.getOutputFileExtension();

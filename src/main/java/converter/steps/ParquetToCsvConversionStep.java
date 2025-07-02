@@ -3,7 +3,6 @@ package converter.steps;
 import java.io.*;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,19 +20,13 @@ import org.apache.parquet.hadoop.ParquetReader;
 import org.apache.parquet.hadoop.util.HadoopInputFile;
 import org.apache.parquet.io.InputFile;
 
-import converter.abstractions.IConvertPilelineStep;
+import converter.abstractions.ConverterPipelineStepBase;
 import converter.constants.FileConstants;
 import converter.constants.SupportingExtensionContants;
 import converter.exceptions.YadConverterException;
 import converter.models.ConverterPipelineData;
 
-public class ParquetToCsvConversionStep implements IConvertPilelineStep {
-    private IConvertPilelineStep nextStep;
-
-    public void setNextStep(IConvertPilelineStep nextStep) {
-        this.nextStep = nextStep;
-    }
-
+public class ParquetToCsvConversionStep extends ConverterPipelineStepBase {
     public void run(ConverterPipelineData data) throws YadConverterException {
         boolean isParquetToCsvConversion =
             data.getInputFileExtension().equalsIgnoreCase(SupportingExtensionContants.PARQUET)

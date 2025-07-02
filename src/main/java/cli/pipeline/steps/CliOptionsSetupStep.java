@@ -2,11 +2,11 @@ package cli.pipeline.steps;
 
 import org.apache.commons.cli.*;
 
-import cli.pipeline.abstractions.CliPipelineBaseStep;
+import cli.pipeline.abstractions.CliPipelineStepBase;
 import cli.pipeline.constants.OptionConstants;
 import cli.pipeline.models.CliPipelineData;
 
-public class CliOptionsSetupStep extends CliPipelineBaseStep {
+public class CliOptionsSetupStep extends CliPipelineStepBase {
 
     public void run(CliPipelineData data) throws Exception {
         Options options = new Options();

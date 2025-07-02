@@ -5,15 +5,16 @@ import converter.models.ConverterPipelineData;
 
 /**
  * Represents a step in a converter pipeline.
- * Each step can be linked to the next step, forming a chain of responsibility.
+ * Each step can be chained with another step and executed with pipeline data.
  */
 public interface IConvertPilelineStep {
     /**
-     * Sets the next step in the conversion pipeline.
+     * Chains the current pipeline step with the specified next step.
      *
-     * @param nextStep the next {@code IConvertPilelineStep} to be executed after this step
+     * @param nextStep the next {@code IConvertPilelineStep} to execute after the current step
+     * @return the combined {@code IConvertPilelineStep} representing the chained steps
      */
-    void setNextStep(IConvertPilelineStep nextStep);
+    IConvertPilelineStep then(IConvertPilelineStep nextStep);
 
     /**
      * Executes the pipeline step using the provided {@link ConverterPipelineData}.
