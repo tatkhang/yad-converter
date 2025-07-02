@@ -1,6 +1,6 @@
 package converter.abstractions;
 
-import converter.exceptions.YadConverterException;
+import common.exceptions.YadConverterException;
 import converter.models.ConverterPipelineData;
 
 /**

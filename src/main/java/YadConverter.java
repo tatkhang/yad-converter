@@ -1,5 +1,5 @@
 import cli.pipeline.CliPipeline;
-import converter.exceptions.YadConverterException;
+import common.exceptions.YadConverterException;
 
 public class YadConverter {
 

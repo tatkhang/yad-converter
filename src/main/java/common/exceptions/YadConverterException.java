@@ -1,4 +1,4 @@
-package converter.exceptions;
+package common.exceptions;
 
 public class YadConverterException extends Exception {
     /**

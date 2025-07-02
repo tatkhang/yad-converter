@@ -1,5 +1,6 @@
 package converter.models;
 
+import common.models.AvroDataCarrier;
 import converter.constants.FileConstants;
 
 public class ConverterPipelineData {
@@ -8,6 +9,8 @@ public class ConverterPipelineData {
 
     private String inputFileExtension;
     private String outputFileExtension;
+
+    private AvroDataCarrier avroData;
 
     public ConverterPipelineData(String inputFilePath, String outputFilePath) {
         this.inputFilePath = inputFilePath;
@@ -31,6 +34,14 @@ public class ConverterPipelineData {
 
     public String getOutputFileExtension() {
         return outputFileExtension;
+    }
+
+    public AvroDataCarrier getAvroData() {
+        return avroData;
+    }
+
+    public void setAvroData(AvroDataCarrier avroData) {
+        this.avroData = avroData;
     }
 
     private String extractFileExtension(String filePath) {

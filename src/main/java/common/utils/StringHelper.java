@@ -1,4 +1,6 @@
-package utils;
+package common.utils;
+
+import common.exceptions.YadConverterException;
 
 public class StringHelper {
     /**
@@ -55,5 +57,34 @@ public class StringHelper {
             || "false".equalsIgnoreCase(value)
             || "1".equals(value)
             || "0".equals(value);
-    } 
+    }
+
+    public static Long convertToLong(String stringValue) throws YadConverterException {
+        try {
+            return Long.parseLong(stringValue);
+        } catch (NumberFormatException ex) {
+            throw new YadConverterException("Could not convert %s to LONG.", stringValue);
+        }
+    }
+
+    public static Double convertToDouble(String stringValue) throws YadConverterException {
+        try {
+            return Double.parseDouble(stringValue);
+        } catch (NumberFormatException ex) {
+            throw new YadConverterException("Could not convert %s to DOUBLE.", stringValue);
+        }
+    }
+
+    public static Boolean convertToBoolean(String stringValue) throws YadConverterException {
+        if ("true".equalsIgnoreCase(stringValue) || "1".equals(stringValue)) {
+            return true;
+        }
+
+        if ("false".equalsIgnoreCase(stringValue) || "0".equals(stringValue)) {
+            return false;
+        }
+
+        throw new YadConverterException("Could not convert %s to BOOLEAN.", stringValue);
+    }
+
 }

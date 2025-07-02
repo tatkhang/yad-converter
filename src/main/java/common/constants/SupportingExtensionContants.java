@@ -1,4 +1,4 @@
-package converter.constants;
+package common.constants;
 
 public class SupportingExtensionContants {
     public static final String CSV = "csv";

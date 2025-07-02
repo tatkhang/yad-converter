@@ -1,11 +1,10 @@
 package converter;
 
+import common.exceptions.YadConverterException;
+import common.utils.*;
 import converter.abstractions.IConvertPilelineStep;
-import converter.exceptions.YadConverterException;
 import converter.models.ConverterPipelineData;
 import converter.steps.*;
-
-import utils.*;
 
 /**
  * The {@code ConverterPipeline} class allows sequential execution of multiple
@@ -50,10 +49,16 @@ public class ConverterPipeline {
      *         </ol>
      */
     public static ConverterPipeline buildDefault() {
+//        return ConverterPipeline
+//            .startWith(FileExtensionValidationStep.class)
+//            .then(CsvToParquetConversionStep.class)
+//            .then(ParquetToCsvConversionStep.class)
+//            .then(FallbackStep.class);
+
         return ConverterPipeline
             .startWith(FileExtensionValidationStep.class)
-            .then(CsvToParquetConversionStep.class)
-            .then(ParquetToCsvConversionStep.class)
+            .then(InputFileParsingStep.class)
+            .then(OutputFileWritingStep.class)
             .then(FallbackStep.class);
     }
 
@@ -62,8 +67,7 @@ public class ConverterPipeline {
      * This method initializes the pipeline with the first step, allowing further
      * steps to be added using the {@link #then(Class)} method.
      *
-     * @param <T>   the type of the conversion step, extending
-     *              {@link IConvertPilelineStep}
+     * @param <T> the type of the conversion step, extending {@link IConvertPilelineStep}
      * @param clazz the class of the first conversion step to add
      * @return a new {@code ConverterPipeline} instance with the specified first step
      */
@@ -73,19 +77,29 @@ public class ConverterPipeline {
 
     /**
      * Adds a new conversion step to the pipeline using the specified class type.
-     * The step is instantiated via
-     * {@link GenericTypeHelper#constructInstance(Class)}. If this is the first
-     * step, it initializes the pipeline; otherwise, it appends the step to the end
-     * of the current pipeline.
+     * The step is instantiated via {@link GenericTypeHelper#constructInstance(Class)}.
+     * If this is the first step, it initializes the pipeline;
+     * otherwise, it appends the step to the end of the current pipeline.
      *
-     * @param <T>   the type of the conversion step, extending
-     *              {@link IConvertPilelineStep}
+     * @param <T> the type of the conversion step, extending {@link IConvertPilelineStep}
      * @param clazz the class of the conversion step to add
      * @return the current {@code ConverterPipeline} instance for method chaining
      */
     public <T extends IConvertPilelineStep> ConverterPipeline then(Class<T> clazz) {
         IConvertPilelineStep step = GenericTypeHelper.constructInstance(clazz);
 
+        return then(step);
+    }
+
+    /**
+     * Adds a new conversion step to the pipeline
+     * If this is the first step, it initializes the pipeline;
+     * otherwise, it appends the step to the end of the current pipeline.
+     *
+     * @param step the conversion step to add
+     * @return the current {@code ConverterPipeline} instance for method chaining
+     */
+    private ConverterPipeline then(IConvertPilelineStep step) {
         if (firstStep == null) {
             firstStep = currentStep = step;
         } else {

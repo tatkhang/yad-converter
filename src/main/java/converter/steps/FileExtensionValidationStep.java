@@ -1,11 +1,12 @@
 package converter.steps;
 
+import common.constants.SupportingExtensionContants;
+import common.exceptions.YadConverterException;
 import converter.abstractions.ConverterPipelineStepBase;
-import converter.constants.SupportingExtensionContants;
-import converter.exceptions.YadConverterException;
 import converter.models.ConverterPipelineData;
 
 public class FileExtensionValidationStep extends ConverterPipelineStepBase {
+
     public void run(ConverterPipelineData data) throws YadConverterException {
         String inputFileExtension = data.getInputFileExtension();
         String outputFileExtension = data.getOutputFileExtension();
@@ -24,4 +25,5 @@ public class FileExtensionValidationStep extends ConverterPipelineStepBase {
 
         nextStep.run(data);
     }
+
 }
