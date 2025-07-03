@@ -9,6 +9,7 @@ Yet another data converter (YadConverter) is a simple Java CLI tool for converti
 - [Usage](#usage)
 - [Testing & Code Coverage](#testing--code-coverage)
 - [Design](#design)
+- [Dependencies](#dependencies)
 - [Room for Improvement](#room-for-improvement)
 
 ---
@@ -53,9 +54,68 @@ Yet another data converter (YadConverter) is a simple Java CLI tool for converti
 
   > Reference: [StackOverflow answer](https://stackoverflow.com/a/55398682)
 
+ ***Current code branch coverage is 91%***
+
 ---
 
 ## Design
+
+### Pipelines
+
+The tool is structured around two main pipelines:
+
+- **[CliPipeline](src/main/java/cli/pipeline/CliPipeline.java):** Manages command-line interactions and output display.
+- **[ConverterPipeline](src/main/java/cli/converter/ConverterPipeline.java):** Handles the conversion process from the input file to the output file.
+
+```mermaid
+flowchart TD
+  subgraph ConverterPipeline
+    FileExtensionValidationStep --> InputFileParsingStep
+    InputFileParsingStep --> OutputFileWritingStep
+  end
+  subgraph CliPipeline
+    CliOptionsSetupStep --> CliOptionsParsingStep
+    CliOptionsParsingStep --> HelpCommandExecutionStep
+    HelpCommandExecutionStep --> ConversionCommandExecutionStep
+    ConversionCommandExecutionStep --> FileExtensionValidationStep
+    OutputFileWritingStep --> SayGoodbyeStep
+  end
+```
+
+### Conversion Flow
+
+The conversion process follows these steps:
+
+```mermaid
+graph LR
+  Parsing_input_file --> Avro_format_data
+  Avro_format_data --> Write_output_file
+```
+Implementations of `InputFileParser` and `OutputFileWriter` are designed to support extensibility for different file formats. These implementations can be registered with the system using the `FileParserRegistry` and `FileWriterRegistry` classes. 
+
+- **Registration:**  
+  Custom parsers and writers for new file types (e.g., JSON, XML) can be added by implementing the respective interfaces and registering them with the appropriate registry. This enables the converter to recognize and process additional formats without modifying the core logic.
+
+- **Retrieval:**  
+  During the conversion process, the system queries the registries to retrieve the appropriate parser or writer based on the file extension or format. This decouples the conversion logic from specific file implementations and makes the architecture modular and easy to extend.
+
+This registry-based approach allows YadConverter to be easily adapted for future requirements and new data formats.
+
+---
+
+## Dependencies
+
+This project is built with Java 11 and leverages the following libraries:
+
+| Library                | Description                                                                                   |
+|------------------------|-----------------------------------------------------------------------------------------------|
+| **Apache Commons CSV** | Reads and writes files in various CSV (Comma Separated Values) formats.                       |
+| **Apache Parquet**     | Enables efficient reading and writing of Parquet files.                                       |
+| **Apache Avro**        | Provides schema definition and acts as a common data serialization framework.                 |
+| **Hadoop Common**      | Supplies core I/O and filesystem support, required for Parquet integration.                   |
+| **Hadoop Client API**  | Offers APIs for local filesystem operations, especially when working with Parquet files.      |
+| **JUnit Jupiter**      | Framework for writing and running unit tests.                                                 |
+| **JaCoCo**             | Generates code coverage reports for test suites.                                              |
 
 ---
 
